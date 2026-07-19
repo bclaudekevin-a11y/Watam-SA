@@ -24,10 +24,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'garde-ta-clé-actuelle-ici-en-secours
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = ['*']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
