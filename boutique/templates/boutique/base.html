@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>WATAM - {% block titre %}Accueil{% endblock %}</title>
     <link rel="icon" type="image/png" href="{% static 'boutique/icons/icone-watam.JPG' %}">
@@ -63,27 +64,36 @@
 </head>
 <body>
 
-    <nav>
-        <div class="logo">WATAM</div>
-        <ul style="list-style-type: none; padding: 0; margin: 0; display: flex; justify-content: center; gap: 20px;">
-            <li><a href="{% url 'accueil' %}" style="display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none;">
-    <!-- On force la taille de l'icône ici -->
-    <img src="{% static 'boutique/icons/home.png' %}" alt="Accueil" style="width: 40px; height: 40px; object-fit: contain;">
-    <span style="font-size: 12px; color: #444; margin-top: 4px;">Accueil</span>
-</a>
-            
+    <nav style="position: sticky; top: 0; left: 0; width: 100%; background-color: #ffffff; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.08); padding: 10px 0;">
+    
+    <!-- Le logo centré pour laisser toute la place aux icônes en dessous -->
+    <div class="logo" style="text-align: center; font-weight: bold; font-size: 18px; color: #b31010; margin-bottom: 12px;">WATAM</div>
+    
+    <!-- La liste des icônes à taille normale qui peuvent défiler horizontalement si l'écran est trop petit -->
+    <ul style="list-style-type: none; padding: 0 10px; margin: 0; display: flex; justify-content: space-around; align-items: center; gap: 15px; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+        
+        <!-- 1. Bloc Accueil -->
+        <li style="flex-shrink: 0;">
+            <a href="{% url 'accueil' %}" class="nav-item-hover" style="display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none;">
+                <img src="{% static 'boutique/icons/home.png' %}" alt="Accueil" style="width: 40px; height: 40px; object-fit: contain;">
+                <span style="font-size: 11px; color: #444; margin-top: 4px; font-weight: 500;">Accueil</span>
+            </a>
+        </li>
+
+        <!-- 2. Blocs des catégories dynamiques -->
         {% for cat in toutes_categories %}
-          <li>
+        <li style="flex-shrink: 0;">
             <a href="{% url 'produits_categorie' nom=cat.nom %}" class="nav-item-hover" style="display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none;">
                 {% if cat.image %}
                 <img src="{{ cat.image.url }}" alt="{{ cat.nom }}" style="width: 40px; height: 40px; object-fit: cover;">
                 {% endif %}
-                <span style="font-size: 12px; margin-top: 4px; color: #444;">{{ cat.nom }}</span>
+                <span style="font-size: 11px; color: #444; margin-top: 4px; font-weight: 500;">{{ cat.nom }}</span>
             </a>
         </li>
         {% endfor %}
-        
-    </nav>
+
+    </ul>
+</nav>
 
     <main>
         {% block contenu %}
@@ -91,7 +101,7 @@
     </main>
 
     <footer>
-        <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; padding: 20px 0;">
+        <div style="display: flex;flex-wrap: wrap; justify-content: center; gap: 25px; flex-wrap: wrap; padding: 20px 0;">
             <ul style="list-style-type: none; padding: 0; margin: 0; display: flex; justify-content: center; gap: 20px;">
            <li><a href="{% url 'accueil' %}" style="display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none;">
     <!-- On force la taille de l'icône ici -->
@@ -111,7 +121,7 @@
         {% endfor %}
         </div>
         <div style="text-align: center; padding-bottom: 15px; color: #000000;">
-            <p>📞 +226 78 21 88 05 &nbsp;|&nbsp; 📍 Ouagadougou, Burkina Faso</p>
+            <p>📞 +226 78 21 88 05 /+226 76 58 22 31 /+226 79 30 86 68 / +226 25 34 63 31 &nbsp;|&nbsp; 📍 Ouagadougou, Burkina Faso</p>
         </div>
         <div style="display: flex; justify-content: center; gap: 20px; padding-bottom: 20px;">
             <img src="{% static 'boutique/icons/whatsapp-logo.png' %}" alt="Whatsapp" style="width: 28px; height: 28px;">
