@@ -36,11 +36,11 @@
         }
         
         footer {
-            background-color: #000000;
+            background-color: #fffdfd;
             text-align: center;
             padding: 20px;
             margin-top: 40px;
-            color: #999;
+            color: #000000;
         }
         html, body {
              height: 100%;
@@ -52,26 +52,37 @@
         }
         main {
     flex: 1;}
+    .nav-item-hover {
+        transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .nav-item-hover:hover {
+        transform: translateY(-3px); /* Soulève légèrement l'icône de 3 pixels */
+        filter: brightness(1.2);    /* Rend l'icône un tout petit peu plus lumineuse au survol */
+    }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo">WATAM</div>
-        <ul>
-            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+        <ul style="list-style-type: none; padding: 0; margin: 0; display: flex; justify-content: center; gap: 20px;">
+            <li><a href="{% url 'accueil' %}" style="display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none;">
+    <!-- On force la taille de l'icône ici -->
+    <img src="{% static 'boutique/icons/home.png' %}" alt="Accueil" style="width: 40px; height: 40px; object-fit: contain;">
+    <span style="font-size: 12px; color: #444; margin-top: 4px;">Accueil</span>
+</a>
             
         {% for cat in toutes_categories %}
-        <li>
-            <a href="{% url 'produits_categorie' nom=cat.nom %}" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-            {% if cat.image %}
-            <img src="{{ cat.image.url }}" alt="{{ cat.nom }}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;">
-            {% endif %}
-            <span style="font-size: 12px; margin-top: 4px;">{{ cat.nom }}</span>
+          <li>
+            <a href="{% url 'produits_categorie' nom=cat.nom %}" class="nav-item-hover" style="display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none;">
+                {% if cat.image %}
+                <img src="{{ cat.image.url }}" alt="{{ cat.nom }}" style="width: 40px; height: 40px; object-fit: cover;">
+                {% endif %}
+                <span style="font-size: 12px; margin-top: 4px; color: #444;">{{ cat.nom }}</span>
             </a>
         </li>
         {% endfor %}
-        </ul>
+        
     </nav>
 
     <main>
@@ -81,24 +92,36 @@
 
     <footer>
         <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; padding: 20px 0;">
-            <a href="{% url 'accueil' %}" style="color: #f5f5f5; text-decoration: none;">Accueil</a>
+            <ul style="list-style-type: none; padding: 0; margin: 0; display: flex; justify-content: center; gap: 20px;">
+           <li><a href="{% url 'accueil' %}" style="display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none;">
+    <!-- On force la taille de l'icône ici -->
+    <img src="{% static 'boutique/icons/home.png' %}" alt="Accueil" style="width: 40px; height: 40px; object-fit: contain;">
+    <span style="font-size: 12px; color: #444; margin-top: 4px;">Accueil</span>
+</a>
             
         {% for cat in toutes_categories %}
-            <a href="{% url 'produits_categorie' nom=cat.nom %}" style="color: #f5f5f5; text-decoration: none;">{{ cat.nom }}</a>
+          <li>
+            <a href="{% url 'produits_categorie' nom=cat.nom %}" class="nav-item-hover" style="display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none;">
+                {% if cat.image %}
+                <img src="{{ cat.image.url }}" alt="{{ cat.nom }}" style="width: 40px; height: 40px; object-fit: cover;">
+                {% endif %}
+                <span style="font-size: 12px; margin-top: 4px; color: #444;">{{ cat.nom }}</span>
+            </a>
+        </li>
         {% endfor %}
         </div>
-        <div style="text-align: center; padding-bottom: 15px; color: #ccc;">
+        <div style="text-align: center; padding-bottom: 15px; color: #000000;">
             <p>📞 +226 78 21 88 05 &nbsp;|&nbsp; 📍 Ouagadougou, Burkina Faso</p>
         </div>
         <div style="display: flex; justify-content: center; gap: 20px; padding-bottom: 20px;">
             <img src="{% static 'boutique/icons/whatsapp-logo.png' %}" alt="Whatsapp" style="width: 28px; height: 28px;">
-            <a href="https://wa.me/22678218805" style="color: #f5f5f5; text-decoration: none;">WhatsApp</a>
+            <a href="https://wa.me/22678218805" style="color: #000000; text-decoration: none;">WhatsApp</a>
             <img src="{% static 'boutique/icons/facebook.png' %}" alt="facebook" style="width: 28px; height: 28px;">
-            <a href="https://www.facebook.com/share/18ywdmmnim/?mibextid=wwXIfr" style="color: #f5f5f5; text-decoration: none;">Facebook</a>
+            <a href="https://www.facebook.com/share/18ywdmmnim/?mibextid=wwXIfr" style="color: #000000; text-decoration: none;">Facebook</a>
             <img src="{% static 'boutique/icons/tik-tok.png' %}" alt="tiktok" style="width: 28px; height: 28px;">
-            <a href="https://www.tiktok.com/@watamsaecletro?_r=1&_t=ZS-97mkLXjIt7a" style="color: #f5f5f5; text-decoration: none;">Tik-tok</a>
+            <a href="https://www.tiktok.com/@watamsaecletro?_r=1&_t=ZS-97mkLXjIt7a" style="color: #030303; text-decoration: none;">Tik-tok</a>
             <img src="{% static 'boutique/icons/instagram-logo.png' %}" alt="instagram" style="width: 28px; height: 28px;">
-            <a href="https://www.instagram.com/watammotors" style="color: #f5f5f5; text-decoration: none;">instagram</a>
+            <a href="https://www.instagram.com/watammotors" style="color: #000000; text-decoration: none;">instagram</a>
         </div>
         
         

@@ -15,6 +15,8 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,6 +29,7 @@ SECRET_KEY = 'django-insecure-h67ztbgzz$c5lzj@m4nsou3ygzju+s$60t3$cm=$lq2((6_2$$
 DEBUG = True
 
 ALLOWED_HOSTS = ['web-production-ce9fb.up.railway.app', '127.0.0.1', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-ce9fb.up.railway.app']
 
 # Application definition
 
