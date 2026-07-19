@@ -1,0 +1,27 @@
+{% extends 'boutique/base.html' %}
+
+{% block titre %}{{ produit.nom }}{% endblock %}
+
+{% block contenu %}
+
+    <section style="padding: 40px; display: flex; gap: 40px; flex-wrap: wrap;">
+
+        <div style="flex: 1; min-width: 280px;">
+            {% if produit.image %}
+                <img src="{{ produit.image.url }}" alt="{{ produit.nom }}" style="width: 100%; max-width: 400px; object-fit: cover;">
+            {% endif %}
+        </div>
+
+        <div style="flex: 1; min-width: 280px;">
+            <h1 style="color: #000000;">{{ produit.nom }}</h1>
+            <p style="color: #666; margin: 10px 0;">Catégorie : {{ produit.categorie.nom }}</p>
+            <p style="font-size: 24px; font-weight: bold; margin: 20px 0;">{{ produit.prix }} FCFA</p>
+            <p>{{ produit.description }}</p>
+            <a href="{% url 'commander' produit_id=produit.id %}" style="display: inline-block; margin-top: 30px; padding: 12px 25px; background-color: #800020; color: #fff; text-decoration: none;">
+            Commander ce produit
+            </a>
+        </div>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'boutique/base.html' %}
+
+{% block titre %}Commander{% endblock %}
+
+{% block contenu %}
+
+    <section style="padding: 40px; max-width: 500px; margin: 0 auto;">
+        <h1 style="color: #800020;">Commander : {{ produit.nom }}</h1>
+        <p style="margin: 10px 0 30px 0;">Prix : {{ produit.prix }} FCFA</p>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" style="margin-top: 20px; padding: 12px 25px; background-color: #800020; color: #fff; border: none; cursor: pointer;">
+                Valider la commande
+            </button>
+        </form>
+    </section>
+
+{% endblock %}

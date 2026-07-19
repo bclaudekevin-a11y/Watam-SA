@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>WATAM - {% block titre %}Accueil{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'boutique/icons/icone-watam.JPG' %}">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #f5f2f2; color: #000000; }         
+                  
+        nav {
+            background-color: #fdfbfb;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #752222;
+        }
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #752727;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        nav ul li a {
+            color: #000000;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            color: #000000;
+        }
+        
+        footer {
+            background-color: #000000;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #999;
+        }
+        html, body {
+             height: 100%;
+            }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+    flex: 1;}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">WATAM</div>
+        <ul>
+            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+            
+        {% for cat in toutes_categories %}
+        <li>
+            <a href="{% url 'produits_categorie' nom=cat.nom %}" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+            {% if cat.image %}
+            <img src="{{ cat.image.url }}" alt="{{ cat.nom }}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;">
+            {% endif %}
+            <span style="font-size: 12px; margin-top: 4px;">{{ cat.nom }}</span>
+            </a>
+        </li>
+        {% endfor %}
+        </ul>
+    </nav>
+
+    <main>
+        {% block contenu %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; padding: 20px 0;">
+            <a href="{% url 'accueil' %}" style="color: #f5f5f5; text-decoration: none;">Accueil</a>
+            
+        {% for cat in toutes_categories %}
+            <a href="{% url 'produits_categorie' nom=cat.nom %}" style="color: #f5f5f5; text-decoration: none;">{{ cat.nom }}</a>
+        {% endfor %}
+        </div>
+        <div style="text-align: center; padding-bottom: 15px; color: #ccc;">
+            <p>📞 +226 78 21 88 05 &nbsp;|&nbsp; 📍 Ouagadougou, Burkina Faso</p>
+        </div>
+        <div style="display: flex; justify-content: center; gap: 20px; padding-bottom: 20px;">
+            <img src="{% static 'boutique/icons/whatsapp-logo.png' %}" alt="Whatsapp" style="width: 28px; height: 28px;">
+            <a href="https://wa.me/22678218805" style="color: #f5f5f5; text-decoration: none;">WhatsApp</a>
+            <img src="{% static 'boutique/icons/facebook.png' %}" alt="facebook" style="width: 28px; height: 28px;">
+            <a href="https://www.facebook.com/share/18ywdmmnim/?mibextid=wwXIfr" style="color: #f5f5f5; text-decoration: none;">Facebook</a>
+            <img src="{% static 'boutique/icons/tik-tok.png' %}" alt="tiktok" style="width: 28px; height: 28px;">
+            <a href="https://www.tiktok.com/@watamsaecletro?_r=1&_t=ZS-97mkLXjIt7a" style="color: #f5f5f5; text-decoration: none;">Tik-tok</a>
+            <img src="{% static 'boutique/icons/instagram-logo.png' %}" alt="instagram" style="width: 28px; height: 28px;">
+            <a href="https://www.instagram.com/watammotors" style="color: #f5f5f5; text-decoration: none;">instagram</a>
+        </div>
+        
+        
+        <p style="text-align: center; padding-bottom: 15px;">&copy; 2026 WATAM SA — Tous droits réservés</p>
+    </footer>
+
+</body>
+</html> 
