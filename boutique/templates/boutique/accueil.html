@@ -52,37 +52,51 @@
     </p>
 </section>
 
-<!-- Tes blocs suivants (Catégories de produits, etc.) viennent se remettre juste ici -->
+<!-- Section unique : Produits en Vedette -->
+<section style="padding: 20px 15px;">
+    <h2 style="border-left: 4px solid #800020; padding-left: 15px; margin-bottom: 20px;">
+        Produits en vedette
+    </h2>
 
-
-    <section style="padding: 20px 15px;">
-    <h2 style="border-left: 4px solid #800020; padding-left: 15px; margin-bottom: 20px; font-size: 1.3rem;">Nos catégories de produits</h2>
-
-    <!-- Le conteneur flexible -->
+    <!-- Le conteneur flexible des produits -->
     <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
         
-        {% for categorie in categories %}
-        <!-- Chaque lien s'adapte : 2 colonnes sur mobile, taille fixe de 200px sur grand écran -->
-        <a href="{% url 'produits_categorie' nom=categorie.nom %}" style="text-decoration: none; color: inherit; flex: 1 1 calc(50% - 12px); max-width: 200px; min-width: 140px; display: flex;">
-            
-            <div style="border: 1px solid #800020; width: 100%; text-align: center; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; border-radius: 6px;">
+        {% for produit in produits_vedettes %}
+            <!-- Le lien cliquable qui englobe tout le produit -->
+            <a href="{% url 'detail_produit' produit.id %}" style="display: block; position: relative; border: 1px solid #800020; width: 200px; text-align: center; overflow: hidden; border-radius: 8px; text-decoration: none; color: inherit;">
                 
-                {% if categorie.image %}
-                <div style="width: 100%; height: 120px; overflow: hidden; background-color: #f9f9f9;">
-                    <img src="{{ categorie.image.url }}" alt="{{ categorie.nom }}" style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
-                </div>
+                <!-- Badge promo rouge -->
+                {% if produit.prix_promo %}
+                    <span style="position: absolute; top: 8px; left: 8px; background: red; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; z-index: 10;">
+                        -{{ produit.pourcentage_reduction }}%
+                    </span>
                 {% endif %}
-                
-                <p style="font-size: 14px; padding: 10px 5px; background-color: #000; color: #ffff; margin: 0; font-weight: 500;">
-                    {{ categorie.nom }}
-                </p>
 
-            </div>
+                <!-- Image du produit -->
+                {% if produit.image %}
+                    <div style="width: 100%; height: 150px; overflow: hidden; background-color: #f9f9f9;">
+                        <img src="{{ produit.image.url }}" alt="{{ produit.nom }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                {% endif %}
 
-        </a>
+                <!-- Infos textuelles (Nom et Prix) -->
+                <div style="padding: 10px 5px; background-color: #fff;">
+                    <p style="font-size: 14px; font-weight: bold; margin: 0 0 5px 0; color: #000;">
+                        {{ produit.nom }}
+                    </p>
+                    
+                    {% if produit.prix_promo %}
+                        <span style="font-size: 12px; text-decoration: line-through; color: #777; margin-right: 5px;">{{ produit.prix }} F</span>
+                        <span style="font-size: 14px; color: #800020; font-weight: bold;">{{ produit.prix_promo }} F</span>
+                    {% else %}
+                        <span style="font-size: 14px; color: #000; font-weight: bold;">{{ produit.prix }} F</span>
+                    {% endif %}
+                </div>
+            </a>
+        {% empty %}
+            <p style="color: #777; margin-top: 20px;">Aucun produit en vedette pour le moment.</p>
         {% endfor %}
 
     </div>
 </section>
-
 {% endblock %}

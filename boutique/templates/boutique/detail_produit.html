@@ -15,11 +15,31 @@
         <div style="flex: 1; min-width: 280px;">
             <h1 style="color: #000000;">{{ produit.nom }}</h1>
             <p style="color: #666; margin: 10px 0;">Catégorie : {{ produit.categorie.nom }}</p>
-            <p style="font-size: 24px; font-weight: bold; margin: 20px 0;">{{ produit.prix }} FCFA</p>
-            <p>{{ produit.description }}</p>
-            <a href="{% url 'commander' produit_id=produit.id %}" style="display: inline-block; margin-top: 30px; padding: 12px 25px; background-color: #800020; color: #fff; text-decoration: none;">
-            Commander ce produit
-            </a>
+<p style="font-size: 24px; font-weight: bold; margin: 20px 0; display: flex; align-items: center; gap: 10px;">
+    {% if produit.prix_promo %}
+        <!-- Badge de réduction -->
+        <span style="background: red; color: white; padding: 2px 8px; border-radius: 4px; font-size: 14px; font-weight: bold;">
+            -{{ produit.pourcentage_reduction }}%
+        </span>
+        <!-- Ancien prix barré -->
+        <span style="font-size: 16px; text-decoration: line-through; color: #777;">
+            {{ produit.prix }} FCFA
+        </span>
+        <!-- Nouveau Prix -->
+        <span style="color: #800020;">
+            {{ produit.prix_promo }} FCFA
+        </span>
+    {% else %}
+        <!-- Prix normal -->
+        <span style="color: #000;">
+            {{ produit.prix }} FCFA
+        </span>
+    {% endif %}
+</p>            <p>{{ produit.description }}</p>
+            <a href="{% url 'commander' produit_id=produit.id %}" 
+   style="display: inline-block; background-color: #800020; color: white; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 6px; margin-top: 15px; text-align: center; transition: background 0.3s;">
+    Commander ce produit
+</a>
         </div>
 
     </section>

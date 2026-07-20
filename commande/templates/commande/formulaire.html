@@ -6,8 +6,21 @@
 
     <section style="padding: 40px; max-width: 500px; margin: 0 auto;">
         <h1 style="color: #800020;">Commander : {{ produit.nom }}</h1>
-        <p style="margin: 10px 0 30px 0;">Prix : {{ produit.prix }} FCFA</p>
-
+<p style="margin: 10px 0 30px 0;">
+    Prix : 
+    {% if produit.prix_promo %}
+        <span style="text-decoration: line-through; color: #777; margin-right: 5px;">
+            {{ produit.prix }} FCFA
+        </span>
+        <span style="color: #800020; font-weight: bold;">
+            {{ produit.prix_promo }} FCFA
+        </span>
+    {% else %}
+        <span style="font-weight: bold; color: #333;">
+            {{ produit.prix }} FCFA
+        </span>
+    {% endif %}
+</p>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
